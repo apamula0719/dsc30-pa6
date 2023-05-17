@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.LinkedList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -56,13 +57,74 @@ class BSTreeTester {
     }
 
     @org.junit.jupiter.api.Test
-    void insertData() {
+    void insertAndFindData() {//tests for both insertData and findData methods
+        for(int x : new int[]{100, 10, 50, 140, 5, 25, 1, 160, 125})
+            bst.insert(x);
 
+        bst.insertData(10, 1);
+        LinkedList<Integer> list = bst.findDataList(10);
+        assertEquals(list.get(0), 1);
+        bst.insertData(10, 2);
+        bst.insertData(10, 3);
+        list = bst.findDataList(10);
+        assertEquals(list.get(1), 2);
+        bst.insertData(100, 10);
+        bst.insertData(100, 20);
+        list = bst.findDataList(100);
+        assertEquals(list.get(1), 20);
+
+        //Error case where key of insert is null
+        boolean throwsException = false;
+        try{
+            bst.insertData(null, 10);
+        }
+        catch(NullPointerException e){
+            throwsException = true;
+        }
+        assertTrue(throwsException);
+
+        //Error case where data of insert is null
+        throwsException = false;
+        try{
+            bst.insertData(10, null);
+        }
+        catch(NullPointerException e){
+            throwsException = true;
+        }
+        assertTrue(throwsException);
+
+        //Error case where list is empty
+        throwsException = false;
+        try{
+            BSTree<Integer> bad_bst = new BSTree<>();
+            bad_bst.insertData(10, 1);
+        }
+        catch(IllegalArgumentException e){
+            throwsException = true;
+        }
+        assertTrue(throwsException);
+
+        //Error case where key of find is null
+        throwsException = false;
+        try{
+            bst.insertData(10, null);
+        }
+        catch(NullPointerException e){
+            throwsException = true;
+        }
+        assertTrue(throwsException);
+
+        //Error case where bst is empty
+        throwsException = false;
+        try{
+            bst.insertData(10, null);
+        }
+        catch(NullPointerException e){
+            throwsException = true;
+        }
+        assertTrue(throwsException);
     }
 
-    @org.junit.jupiter.api.Test
-    void findDataList() {
-    }
 
     @org.junit.jupiter.api.Test
     void findHeight() {

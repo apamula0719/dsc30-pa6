@@ -31,8 +31,8 @@ public static ArrayList<String>  deleteElements() {
 	ArrayList<String> answer_pr2 = new ArrayList<>(11);
 	
 	answer_pr2.add("50");
-	answer_pr2.add("40, 90");
-	answer_pr2.add("35, X, 55, X");
+	answer_pr2.add("40, 75");
+	answer_pr2.add("35, X, 55, 90");
 	return answer_pr2;
 
 }
