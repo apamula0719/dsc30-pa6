@@ -342,6 +342,8 @@ public class BSTree<T extends Comparable<? super T>> implements Iterable {
     public class BSTree_Iterator implements Iterator<T> {
         Stack<BSTNode> iterStack = new Stack<>();
         public BSTree_Iterator() {
+            if(root == null)
+                throw new NoSuchElementException();
             addToStack(root);
         }
 

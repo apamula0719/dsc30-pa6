@@ -30,7 +30,7 @@ public static ArrayList<String>  deleteElements() {
 
 	ArrayList<String> answer_pr2 = new ArrayList<>(11);
 	
-	answer_pr2.add("50");
+	answer_pr2.add("54");
 	answer_pr2.add("40, 75");
 	answer_pr2.add("35, X, 55, 90");
 	return answer_pr2;
@@ -41,8 +41,8 @@ public static ArrayList<String>  traversals() {
 
 	ArrayList<String> answer_pr3 = new ArrayList<>(11);
 	
-	answer_pr3.add("30, 35, 30, 35, 50, 54, 55, 60, 75, 80, 90");
-	answer_pr3.add("50, 40, 30, 35, 45, 60, 55, 54, 80, 73, 90");
+	answer_pr3.add("30, 35, 40, 45, 50, 54, 55, 60, 75, 80, 90");
+	answer_pr3.add("50, 40, 30, 35, 45, 60, 55, 54, 80, 75, 90");
 	answer_pr3.add("35, 30, 45, 40, 54, 55, 75, 90, 80, 60, 50");
 	return answer_pr3;
 

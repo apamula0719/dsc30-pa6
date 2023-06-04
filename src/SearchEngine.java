@@ -57,12 +57,10 @@ public class SearchEngine {
     }
 
     private static void addValues(String[] keys, String value, BSTree<String> bst){
-        value = value.toLowerCase();
         for(int i = 0; i < keys.length; i++){
             bst.insert(keys[i]);
             if(!bst.findDataList(keys[i]).contains(value))//If data is not already in dataList
                 bst.insertData(keys[i], value);
-
         }
     }
     /**
@@ -87,9 +85,11 @@ public class SearchEngine {
         // search and output intersection results
         // hint: list's addAll() and retainAll() methods could be helpful
         LinkedList<String> intersection = new LinkedList<>(allElems);
-        for(int i = 0; i < intersection.size(); i++) {
-            if (!searchTree.findKey(keys[i].toLowerCase()))//If not in list, skip retaining this one's data
-                continue;
+        for(int i = 0; i < keys.length; i++) {//Go through each key, retain all elements in it
+            if (!searchTree.findKey(keys[i].toLowerCase())) {//If not in list, there must be no intersection
+                intersection = new LinkedList<>();
+                break;
+            }
             intersection.retainAll(searchTree.findDataList(keys[i].toLowerCase()));
         }
         print(query, intersection);
@@ -97,13 +97,16 @@ public class SearchEngine {
         // hint: list's addAll() and removeAll() methods could be helpful
         if(keys.length > 1){
             for(int i = 0; i < keys.length; i++){//Outer loop, printing each individual result
-                if (!searchTree.findKey(keys[i].toLowerCase())) {//Don't get unique elements of this list if key is not in BST
+                if (!searchTree.findKey(keys[i].toLowerCase())) {//Don't get unique elements of this list if
+                    // key is not in BST
                     print(keys[i], null);
                     continue;
                 }
                 LinkedList<String> unique = new LinkedList<>(allElems);
                 for(int j = 0; j < keys.length; j++){//Removing all elements that are in other lists
                     if(j == i)//except for this list
+                        continue;
+                    if(!searchTree.findKey(keys[j].toLowerCase()))//skip if not in list
                         continue;
                     unique.removeAll(searchTree.findDataList(keys[j].toLowerCase()));
                 }
@@ -151,7 +154,16 @@ public class SearchEngine {
         // populate search trees
         populateSearchTrees(movieTree, studioTree, ratingTree, fileName);
         // choose the right tree to query
-        searchMyQuery(ratingTree, args[2] + " " + args[3]);
+        String query = "";
+        for(int i = 2; i < args.length-1; i++)
+            query += args[i] + " ";
+        query += args[args.length-1];
+        if(searchKind == 0)
+            searchMyQuery(movieTree, query);
+        if(searchKind == 1)
+            searchMyQuery(studioTree, query);
+        if(searchKind == 2)
+            searchMyQuery(ratingTree, query);
 
     }
 }

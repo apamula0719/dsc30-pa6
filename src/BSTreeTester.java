@@ -1,5 +1,6 @@
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -151,7 +152,7 @@ class BSTreeTester {
         for(int x : new int[]{100, 10, 50, 140, 5})
             bst.insert(x);
         Iterator<Integer> iter = bst.iterator();
-        //assertTrue(iter.hasNext());
+        assertTrue(iter.hasNext());
         assertEquals(iter.next(), 5);
         assertEquals(iter.next(), 10);
         for(int i = 0; i < 3; i++)
@@ -170,5 +171,14 @@ class BSTreeTester {
         iter.next();
         assertTrue(iter.hasNext());
         assertEquals(iter.next(), 55);
+
+        bst = new BSTree<>();
+        assertThrows(NoSuchElementException.class, () -> {
+            bst.iterator();
+        });
+        bst.insert(2);
+        iter = bst.iterator();
+        assertEquals(iter.next(), 2);
+
     }
 }
